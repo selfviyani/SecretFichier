@@ -41,6 +41,7 @@ namespace SecretFichier
             byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
 
             Aes aes = Aes.Create();
+
             aes.Key = key;
             aes.IV = IV;
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
