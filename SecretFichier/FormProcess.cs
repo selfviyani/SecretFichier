@@ -50,10 +50,12 @@ namespace SecretFichier
             byte[] edata = new byte[data.Length];
             byte[] tag = new byte[AesGcm.TagByteSizes.MaxSize];
             aes.Encrypt(nonce, data, edata, tag);
-            byte[] output = new byte[edata.Length + tag.Length];
-            edata.CopyTo(output, 0);
-            tag.CopyTo(output, edata.Length);
-            File.WriteAllBytes(this.tb_destination.Text + ".sf", output);
+
+            byte[] output = new byte[nonce.Length + edata.Length + tag.Length];
+            nonce.CopyTo(output, 0);
+            edata.CopyTo(output, nonce.Length);
+            tag.CopyTo(output, nonce.Length + edata.Length);
+            File.WriteAllBytes(this.tb_destination.Text, output);
         }
 
         private void decrypt_file_gcm(string password)
@@ -78,7 +80,7 @@ namespace SecretFichier
             byte[] data = new byte[edata.Length];
             aes.Decrypt(nonce, edata, tag, data);
 
-            File.WriteAllBytes(this.tb_destination.Text + ".sf", data);
+            File.WriteAllBytes(this.tb_destination.Text, data);
         }
 
 
