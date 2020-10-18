@@ -31,72 +31,56 @@ namespace SecretFichier
             this.encrypt = encrypt;
         }
 
+
+
         private void encrypt_file_gcm(string password)
         {
             // Generate AES key from password
             SHA256 sha = SHA256.Create();
             byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-            Aes aes = Aes.Create();
-            aes.Key = key;
-            aes.IV = IV;
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+            // Prepare AES GCM
+            AesGcm aes = new AesGcm(key);
+            byte[] nonce = new byte[AesGcm.NonceByteSizes.MaxSize];
+            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(nonce);
 
             // Encrypt file
             byte[] data = File.ReadAllBytes(this.filename);
-            byte[] edata;
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                {
-                    cs.Write(data, 0, data.Length);
-                    cs.FlushFinalBlock();
-                }
-                edata = ms.ToArray();
-            }
-            File.WriteAllBytes(this.tb_destination.Text + ".sf", edata);
+            byte[] edata = new byte[data.Length];
+            byte[] tag = new byte[AesGcm.TagByteSizes.MaxSize];
+            aes.Encrypt(nonce, data, edata, tag);
+            byte[] output = new byte[edata.Length + tag.Length];
+            edata.CopyTo(output, 0);
+            tag.CopyTo(output, edata.Length);
+            File.WriteAllBytes(this.tb_destination.Text + ".sf", output);
         }
 
         private void decrypt_file_gcm(string password)
 
         {
-            if (this.filename.EndsWith(".sf"))
-            {
-                // Generate AES key from password
-                SHA256 sha = SHA256.Create();
-                byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-                Aes aes = Aes.Create();
-                aes.Key = key;
-                aes.IV = IV;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+            // Generate AES key from password
+            SHA256 sha = SHA256.Create();
+            byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-                // Decrypt file
-                byte[] edata = File.ReadAllBytes(this.filename);
-                byte[] data;
-                try
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
-                        {
-                            cs.Write(edata, 0, edata.Length);
-                            cs.FlushFinalBlock();
-                        }
-                        data = ms.ToArray();
-                    }
-                    File.WriteAllBytes(this.filename.Remove(this.filename.Length - 3), data);
-                }
-                catch (CryptographicException e)
-                {
-                    MessageBox.Show("Decryption of '" + this.filename + "' failed. Did you enter the correct password?");
-                }
-            }
-            else
-            {
-                MessageBox.Show(this.filename + " is not of type .sf.");
-            }
+            // Prepare AES GCM
+            AesGcm aes = new AesGcm(key);
+            byte[] nonce = new byte[AesGcm.NonceByteSizes.MaxSize];
+            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(nonce);
+
+            // Encrypt file
+            byte[] data = File.ReadAllBytes(this.filename);
+            byte[] edata = new byte[data.Length];
+            byte[] tag = new byte[AesGcm.TagByteSizes.MaxSize];
+            aes.Encrypt(nonce, data, edata, tag);
+            byte[] output = new byte[edata.Length + tag.Length];
+            edata.CopyTo(output, 0);
+            tag.CopyTo(output, edata.Length);
+            File.WriteAllBytes(this.tb_destination.Text + ".sf", output);
         }
+
+
 
 
         private void encrypt_file(string password)
@@ -125,8 +109,6 @@ namespace SecretFichier
             }
             File.WriteAllBytes(this.tb_destination.Text + ".sf", edata);
         }
-
-
 
         private void decrypt_file(string password)
 
