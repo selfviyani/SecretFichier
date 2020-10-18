@@ -64,20 +64,21 @@ namespace SecretFichier
             byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
 
             // Prepare AES GCM
-            AesGcm aes = new AesGcm(key);
-            byte[] nonce = new byte[AesGcm.NonceByteSizes.MaxSize];
-            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(nonce);
+            AesGcm aes = new AesGcm(key);        
 
-            // Encrypt file
-            byte[] data = File.ReadAllBytes(this.filename);
-            byte[] edata = new byte[data.Length];
-            byte[] tag = new byte[AesGcm.TagByteSizes.MaxSize];
-            aes.Encrypt(nonce, data, edata, tag);
-            byte[] output = new byte[edata.Length + tag.Length];
-            edata.CopyTo(output, 0);
-            tag.CopyTo(output, edata.Length);
-            File.WriteAllBytes(this.tb_destination.Text + ".sf", output);
+            // Decrypt file
+            byte[] input = File.ReadAllBytes(this.filename);
+            int nsize = AesGcm.NonceByteSizes.MaxSize;
+            int tsize = AesGcm.TagByteSizes.MaxSize;
+            int dsize = input.Length - nsize - tsize;
+            byte[] nonce = input[..nsize];
+            byte[] edata = input[nsize..(nsize + dsize)];
+            byte[] tag = input[(nsize + dsize)..];
+
+            byte[] data = new byte[edata.Length];
+            aes.Decrypt(nonce, edata, tag, data);
+
+            File.WriteAllBytes(this.tb_destination.Text + ".sf", data);
         }
 
 
@@ -94,10 +95,9 @@ namespace SecretFichier
             aes.IV = IV;
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
-            // Encrypt file
+            // Decrypt file
             byte[] data = File.ReadAllBytes(this.filename);
             byte[] edata;
-
             using (MemoryStream ms = new MemoryStream())
             {
                 using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
@@ -153,7 +153,7 @@ namespace SecretFichier
 
         private void bn_process_Click(object sender, EventArgs e)
         {
-            if (rb_cbc.Enabled)
+            if (rb_cbc.Checked) 
             {
                 if (encrypt)
                     encrypt_file(tb_password.Text);
