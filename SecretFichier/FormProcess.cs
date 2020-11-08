@@ -113,7 +113,6 @@ namespace SecretFichier
         }
 
         private void decrypt_file(string password)
-
         {
             if (this.filename.EndsWith(".sf"))
             {
