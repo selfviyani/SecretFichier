@@ -33,59 +33,6 @@ namespace SecretFichier
 
 
 
-        private void encrypt_file_gcm(string password)
-        {
-            // Generate AES key from password
-            SHA256 sha = SHA256.Create();
-            byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-            // Prepare AES GCM
-            AesGcm aes = new AesGcm(key);
-            byte[] nonce = new byte[AesGcm.NonceByteSizes.MaxSize];
-            RandomNumberGenerator rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(nonce);
-
-            // Encrypt file
-            byte[] data = File.ReadAllBytes(this.filename);
-            byte[] edata = new byte[data.Length];
-            byte[] tag = new byte[AesGcm.TagByteSizes.MaxSize];
-            aes.Encrypt(nonce, data, edata, tag);
-
-            byte[] output = new byte[nonce.Length + edata.Length + tag.Length];
-            nonce.CopyTo(output, 0);
-            edata.CopyTo(output, nonce.Length);
-            tag.CopyTo(output, nonce.Length + edata.Length);
-            File.WriteAllBytes(this.tb_destination.Text, output);
-        }
-
-        private void decrypt_file_gcm(string password)
-
-        {
-            // Generate AES key from password
-            SHA256 sha = SHA256.Create();
-            byte[] key = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-            // Prepare AES GCM
-            AesGcm aes = new AesGcm(key);        
-
-            // Decrypt file
-            byte[] input = File.ReadAllBytes(this.filename);
-            int nsize = AesGcm.NonceByteSizes.MaxSize;
-            int tsize = AesGcm.TagByteSizes.MaxSize;
-            int dsize = input.Length - nsize - tsize;
-            byte[] nonce = input[..nsize];
-            byte[] edata = input[nsize..(nsize + dsize)];
-            byte[] tag = input[(nsize + dsize)..];
-
-            byte[] data = new byte[edata.Length];
-            aes.Decrypt(nonce, edata, tag, data);
-
-            File.WriteAllBytes(this.tb_destination.Text, data);
-        }
-
-
-
-
         private void encrypt_file(string password)
         {
             // Generate AES key from password
@@ -157,21 +104,10 @@ namespace SecretFichier
 
         private void bn_process_Click(object sender, EventArgs e)
         {
-            if (rb_cbc.Checked) 
-            {
-                if (encrypt)
-                    encrypt_file(tb_password.Text);
-                else
-                    decrypt_file(tb_password.Text);
-            }
+            if (encrypt)
+                encrypt_file(tb_password.Text);
             else
-            {
-                if (encrypt)
-                    encrypt_file_gcm(tb_password.Text);
-                else
-                    decrypt_file_gcm(tb_password.Text);
-            }
-
+                decrypt_file(tb_password.Text);
             this.Close();
         }
 
