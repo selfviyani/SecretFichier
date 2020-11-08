@@ -109,8 +109,10 @@ namespace SecretFichier
                 }
                 edata = ms.ToArray();
             }
-            File.WriteAllBytes(this.tb_destination.Text + ".sf", edata);
+            File.WriteAllBytes(this.tb_destination.Text, edata);
         }
+
+
 
         private void decrypt_file(string password)
         {
@@ -138,8 +140,9 @@ namespace SecretFichier
                         }
                         data = ms.ToArray();
                     }
-                File.WriteAllBytes(this.filename.Remove(this.filename.Length - 3), data);
-                } catch (CryptographicException e)
+                File.WriteAllBytes(this.tb_destination.Text, data);
+                }
+                catch (CryptographicException e)
                 {
                     MessageBox.Show("Decryption of '" + this.filename + "' failed. Did you enter the correct password?");
                 }
@@ -174,8 +177,6 @@ namespace SecretFichier
 
 
 
-
-
         private void tb_password_TextChanged(object sender, EventArgs e)
         {
             if (tb_password.Text.Length < 8)
@@ -196,7 +197,22 @@ namespace SecretFichier
         private void bn_destination_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = this.filename;
+            if (this.encrypt)
+            {
+                sfd.FileName = this.filename + ".sf";
+            }
+            else
+            {
+                if (this.filename.EndsWith(".sf"))
+                {
+                    sfd.FileName = this.filename[0..^3];
+                }
+                else
+                {
+                    sfd.FileName = this.filename;
+                }
+            }
+
             if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     tb_destination.Text = sfd.FileName;
