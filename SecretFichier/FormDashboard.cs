@@ -32,8 +32,8 @@ namespace SecretFichier
         }
 
         private void rb_encryp_CheckedChanged(object sender, EventArgs e)
-        { 
-            bn_start.Enabled = true;
+        {
+                bn_start.Enabled = true;
         }
 
         private void rb_decryp_CheckedChanged(object sender, EventArgs e)
@@ -44,6 +44,17 @@ namespace SecretFichier
         private void bn_close_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void bn_about_Click(object sender, EventArgs e)
+        {
+            FormAbout about = new FormAbout();
+            about.ShowDialog();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

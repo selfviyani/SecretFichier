@@ -123,11 +123,6 @@ namespace SecretFichier
 
 
 
-        private void bn_close_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
 
 
         private void bn_destination_Click(object sender, EventArgs e)
