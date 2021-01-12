@@ -27,7 +27,8 @@ namespace SecretFichier
         
         private void bn_ok_Click(object sender, EventArgs e)
         {
-            FormProcess ipass = new FormProcess(tb_dshow.Text, rb_encryp.Checked);  
+            FormProcess ipass = new FormProcess(tb_dshow.Text, rb_encryp.Checked);
+            this.Hide();
             ipass.ShowDialog();
         }
 
@@ -50,11 +51,6 @@ namespace SecretFichier
         {
             FormAbout about = new FormAbout();
             about.ShowDialog();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

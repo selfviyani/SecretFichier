@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label4 = new System.Windows.Forms.Label();
+            this.bn_back = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             this.bn_process.Enabled = false;
             this.bn_process.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bn_process.Location = new System.Drawing.Point(213, 402);
+            this.bn_process.Location = new System.Drawing.Point(408, 343);
             this.bn_process.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bn_process.Name = "bn_process";
             this.bn_process.Size = new System.Drawing.Size(208, 49);
@@ -102,7 +103,7 @@
             // bn_destination
             // 
             this.bn_destination.Image = ((System.Drawing.Image)(resources.GetObject("bn_destination.Image")));
-            this.bn_destination.Location = new System.Drawing.Point(603, 90);
+            this.bn_destination.Location = new System.Drawing.Point(603, 89);
             this.bn_destination.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bn_destination.Name = "bn_destination";
             this.bn_destination.Size = new System.Drawing.Size(45, 43);
@@ -143,11 +144,23 @@
             this.label4.TabIndex = 15;
             this.label4.Text = "Put more than eight characters ";
             // 
+            // bn_back
+            // 
+            this.bn_back.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.bn_back.Location = new System.Drawing.Point(61, 343);
+            this.bn_back.Name = "bn_back";
+            this.bn_back.Size = new System.Drawing.Size(208, 48);
+            this.bn_back.TabIndex = 16;
+            this.bn_back.Text = "Back";
+            this.bn_back.UseVisualStyleBackColor = true;
+            this.bn_back.Click += new System.EventHandler(this.bn_back_Click);
+            // 
             // FormProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 457);
+            this.ClientSize = new System.Drawing.Size(673, 422);
+            this.Controls.Add(this.bn_back);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tb_destination);
@@ -159,6 +172,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FormProcess";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form Process";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -178,5 +192,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button bn_back;
     }
 }

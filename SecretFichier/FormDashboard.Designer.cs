@@ -108,7 +108,7 @@
             // 
             this.bn_start.Enabled = false;
             this.bn_start.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bn_start.Location = new System.Drawing.Point(557, 461);
+            this.bn_start.Location = new System.Drawing.Point(725, 474);
             this.bn_start.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bn_start.Name = "bn_start";
             this.bn_start.Size = new System.Drawing.Size(213, 60);
@@ -168,7 +168,6 @@
             this.label1.Size = new System.Drawing.Size(251, 57);
             this.label1.TabIndex = 17;
             this.label1.Text = "Select the File";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // FormDashboard
             // 

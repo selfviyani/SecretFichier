@@ -87,7 +87,7 @@ namespace SecretFichier
                         }
                         data = ms.ToArray();
                     }
-                File.WriteAllBytes(this.tb_destination.Text, data);
+                    File.WriteAllBytes(this.tb_destination.Text, data);
                 }
                 catch (CryptographicException e)
                 {
@@ -108,8 +108,13 @@ namespace SecretFichier
                 encrypt_file(tb_password.Text);
             else
                 decrypt_file(tb_password.Text);
-            this.Close();
-        }
+            MessageBox.Show("The Process done!");
+            FormDashboard form1 = new FormDashboard();
+            this.Hide();
+            form1.Show();
+        } 
+    
+
 
 
 
@@ -119,8 +124,7 @@ namespace SecretFichier
                 bn_process.Enabled = false;
             else
                 bn_process.Enabled = true;
-        }
-
+        } 
 
 
 
@@ -148,6 +152,14 @@ namespace SecretFichier
                 {
                     tb_destination.Text = sfd.FileName;
                 }  
+        }
+
+
+        private void bn_back_Click(object sender, EventArgs e)
+        {
+            FormDashboard fdash = new FormDashboard();
+            this.Hide();
+            fdash.ShowDialog();
         }
     }
 }
