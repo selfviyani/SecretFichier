@@ -98,9 +98,9 @@ namespace SecretFichier
             this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(105, 458);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(611, 29);
+            this.label5.Size = new System.Drawing.Size(601, 29);
             this.label5.TabIndex = 11;
-            this.label5.Text = "This program was written by Selviyani as university project at\r\n";
+            this.label5.Text = "This program was written by Selviyani as bachelor project at\r\n";
             // 
             // label6
             // 
@@ -136,6 +136,7 @@ namespace SecretFichier
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAbout";

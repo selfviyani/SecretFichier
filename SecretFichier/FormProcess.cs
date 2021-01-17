@@ -33,7 +33,7 @@ namespace SecretFichier
 
 
 
-        private void encrypt_file(string password)
+        private bool encrypt_file(string password)
         {
             // Generate AES key from password
             SHA256 sha = SHA256.Create();
@@ -57,11 +57,13 @@ namespace SecretFichier
                 edata = ms.ToArray();
             }
             File.WriteAllBytes(this.tb_destination.Text, edata);
+            MessageBox.Show("The encryption was successfully done!");
+            return true;
         }
 
 
 
-        private void decrypt_file(string password)
+        private bool decrypt_file(string password)
         {
             if (this.filename.EndsWith(".sf"))
             {
@@ -88,15 +90,19 @@ namespace SecretFichier
                         data = ms.ToArray();
                     }
                     File.WriteAllBytes(this.tb_destination.Text, data);
+                    MessageBox.Show("The decryption was successfully done!");
+                    return true;
                 }
                 catch (CryptographicException e)
                 {
                     MessageBox.Show("Decryption of '" + this.filename + "' failed. Did you enter the correct password?");
+                    return false;
                 }
             }
             else
             {
                 MessageBox.Show(this.filename + " is not of type .sf.");
+                return false;
             }
         }
 
@@ -104,14 +110,21 @@ namespace SecretFichier
 
         private void bn_process_Click(object sender, EventArgs e)
         {
+            bool success;
             if (encrypt)
-                encrypt_file(tb_password.Text);
+                success = encrypt_file(tb_password.Text);
             else
-                decrypt_file(tb_password.Text);
-            MessageBox.Show("The Process done!");
-            FormDashboard form1 = new FormDashboard();
-            this.Hide();
-            form1.Show();
+                success = decrypt_file(tb_password.Text);
+            if (success)
+            {
+                FormDashboard form1 = new FormDashboard();
+                this.Hide();
+                form1.Show();
+            }
+            else
+            {
+                tb_password.Text = "";
+            }
         } 
     
 

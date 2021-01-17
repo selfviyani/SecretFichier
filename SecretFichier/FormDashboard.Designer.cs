@@ -59,7 +59,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe Print", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(401, 299);
+            this.label2.Location = new System.Drawing.Point(401, 280);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(347, 57);
             this.label2.TabIndex = 9;
@@ -68,13 +68,12 @@
             // rb_encryp
             // 
             this.rb_encryp.AutoSize = true;
-            this.rb_encryp.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rb_encryp.Location = new System.Drawing.Point(413, 379);
+            this.rb_encryp.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rb_encryp.Location = new System.Drawing.Point(401, 371);
             this.rb_encryp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_encryp.Name = "rb_encryp";
-            this.rb_encryp.Size = new System.Drawing.Size(151, 39);
+            this.rb_encryp.Size = new System.Drawing.Size(177, 47);
             this.rb_encryp.TabIndex = 10;
-            this.rb_encryp.TabStop = true;
             this.rb_encryp.Text = "Encryption";
             this.rb_encryp.UseVisualStyleBackColor = true;
             this.rb_encryp.CheckedChanged += new System.EventHandler(this.rb_encryp_CheckedChanged);
@@ -82,13 +81,12 @@
             // rb_decryp
             // 
             this.rb_decryp.AutoSize = true;
-            this.rb_decryp.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rb_decryp.Location = new System.Drawing.Point(598, 379);
+            this.rb_decryp.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rb_decryp.Location = new System.Drawing.Point(584, 371);
             this.rb_decryp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rb_decryp.Name = "rb_decryp";
-            this.rb_decryp.Size = new System.Drawing.Size(150, 39);
+            this.rb_decryp.Size = new System.Drawing.Size(176, 47);
             this.rb_decryp.TabIndex = 11;
-            this.rb_decryp.TabStop = true;
             this.rb_decryp.Text = "Decryption";
             this.rb_decryp.UseVisualStyleBackColor = true;
             this.rb_decryp.CheckedChanged += new System.EventHandler(this.rb_decryp_CheckedChanged);
@@ -96,7 +94,7 @@
             // bt_add
             // 
             this.bt_add.Image = ((System.Drawing.Image)(resources.GetObject("bt_add.Image")));
-            this.bt_add.Location = new System.Drawing.Point(891, 189);
+            this.bt_add.Location = new System.Drawing.Point(879, 189);
             this.bt_add.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bt_add.Name = "bt_add";
             this.bt_add.Size = new System.Drawing.Size(47, 43);
@@ -108,7 +106,7 @@
             // 
             this.bn_start.Enabled = false;
             this.bn_start.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bn_start.Location = new System.Drawing.Point(725, 474);
+            this.bn_start.Location = new System.Drawing.Point(706, 457);
             this.bn_start.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bn_start.Name = "bn_start";
             this.bn_start.Size = new System.Drawing.Size(213, 60);
@@ -163,7 +161,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe Print", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(413, 96);
+            this.label1.Location = new System.Drawing.Point(401, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(251, 57);
             this.label1.TabIndex = 17;
@@ -173,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 560);
+            this.ClientSize = new System.Drawing.Size(941, 543);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_dshow);
             this.Controls.Add(this.panel1);
@@ -183,6 +181,7 @@
             this.Controls.Add(this.rb_encryp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.logo_ss);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FormDashboard";
